@@ -17,10 +17,43 @@ public class PlayerCharacter {
 
 	private Long id;
 	private String name;
-//  private Homeland homeland;
-	private String homeland; //TODO Either make Homeland an Object class or store as String OR Enum
-	private PlayerLevel playerLevel; //TODO create PlayerLevel Enum
+	private int age;
+//	private Location currentLocation;
+	private PlayerLevel playerLevel; //TODO Populate PlayerLevel Enum
 //  private Inventory playerInventory;
+//	private Alignment playerAlignment; //TODO Create player alignment Enum + populate
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public PlayerLevel getPlayerLeve() {
+		return playerLevel;
+	}
+	
+	public void setPlayerLevel(PlayerLevel playerLevel) {
+		this.playerLevel= playerLevel;
+	}
 	
 }
 /*  
