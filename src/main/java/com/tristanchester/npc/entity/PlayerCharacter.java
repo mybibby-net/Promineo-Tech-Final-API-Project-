@@ -1,14 +1,14 @@
 package com.tristanchester.npc.entity;
 
-import java.util.Set;
+//import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+//import javax.persistence.CascadeType;
+//import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.OneToMany;
+//import javax.persistence.OneToOne;
 
 import com.tristanchester.npc.util.PlayerLevel;
 
@@ -18,7 +18,7 @@ public class PlayerCharacter {
 	private Long id;
 	private String name;
 	private int age;
-//	private Location currentLocation;
+//	private Location currentLocation; 
 	private PlayerLevel playerLevel; //TODO Populate PlayerLevel Enum
 //  private Inventory playerInventory;
 //	private Alignment playerAlignment; //TODO Create player alignment Enum + populate
