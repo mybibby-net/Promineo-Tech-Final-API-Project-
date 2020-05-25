@@ -7,8 +7,10 @@ public class NPC {
 	private Long id;
 	private String name;
 	private int age;
-//	private NpcLevel npcLevel;
-//	private Location currentLocation;
+	private NpcLevel npcLevel;
+	private Location currentLocation;
+	private Inventory inventory;
+//	private Alignment alignment;
 	
 	public Long getId() {
 		return id;
@@ -34,7 +36,29 @@ public class NPC {
 		this.age = age;
 	}
 	
+	public NpcLevel getNpcLevel() {
+		return npcLevel;
+	}
 	
+	public void setNpcLevel(NpcLevel npcLevel) {
+		this.npcLevel = npcLevel;
+	}
+	
+	public Location getCurrentLocation() {
+		return currentLocation;
+	}
+	
+	public void setCurrentLocation(Location currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	public void setInvetory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 	
 }
 /* 
