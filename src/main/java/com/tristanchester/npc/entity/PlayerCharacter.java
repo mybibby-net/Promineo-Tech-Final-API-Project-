@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 
 import com.tristanchester.npc.util.PlayerLevel;
 
+//TODO: Inventory issue -> Mapping Character inventories is made obtuse by PlayerCharacter/NPC class differentiation
+	//(cont.) See InventoryController, consider merging classes
+
 @Entity
 public class PlayerCharacter {
 
@@ -19,9 +22,9 @@ public class PlayerCharacter {
 	private String name;
 	private int age;
 	private Location currentLocation; 
-	private PlayerLevel playerLevel; //TODO Populate
+	private PlayerLevel playerLevel; //TODO Populate Enum
 	private Inventory inventory;
-//	private Alignment alignment; //TODO Populate
+//	private Alignment alignment; //TODO Populate Enum
 	
 	public Long getId() {
 		return id;
