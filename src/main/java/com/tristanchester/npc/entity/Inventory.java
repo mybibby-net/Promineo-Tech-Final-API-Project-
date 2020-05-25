@@ -3,12 +3,21 @@ package com.tristanchester.npc.entity;
 import java.util.Set;
 
 public class Inventory {
-
+	
+	private Long id;
 	private int size; //Standard size is 28 "slots"
 	private Set<Item> items;
 	private String owner; //Equal to Character name
 	private int netWorth; //in "gold"
 	private int weight; //in lbs
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public int getSize() {
 		return size;
