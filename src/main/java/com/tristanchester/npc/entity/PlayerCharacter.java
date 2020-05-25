@@ -18,10 +18,10 @@ public class PlayerCharacter {
 	private Long id;
 	private String name;
 	private int age;
-//	private Location currentLocation; 
-	private PlayerLevel playerLevel; //TODO Populate PlayerLevel Enum
-//  private Inventory playerInventory;
-//	private Alignment playerAlignment; //TODO Create player alignment Enum + populate
+	private Location currentLocation; 
+	private PlayerLevel playerLevel; //TODO Populate
+	private Inventory inventory;
+//	private Alignment alignment; //TODO Populate
 	
 	public Long getId() {
 		return id;
@@ -55,6 +55,22 @@ public class PlayerCharacter {
 		this.playerLevel= playerLevel;
 	}
 	
+	public Location getCurrentLocation() {
+		return currentLocation;
+	}
+	
+	public void setCurrentLocation(Location currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+	
 }
 /*  
  *Player Character Properties:
@@ -62,8 +78,6 @@ public class PlayerCharacter {
  *  Name: String
  *  PlayerLevel: Enum
  *  Age: int
- *  Homeland: make new obj? or make String
- *  Current Location: String (or new Object) //TODO make Location object class
  *  Alignment: Enum
  *  DiploLevel: Enum (Diplomatic Relations with NPC)
  *  Stats:
