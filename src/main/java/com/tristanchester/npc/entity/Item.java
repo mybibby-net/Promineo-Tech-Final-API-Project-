@@ -7,7 +7,8 @@ public class Item {
 	private String itemDescription;
 	private int statModifier;
 	private int itemCost;
-	//private int itemQuantity; //TODO add to inventory class
+	private int weight;
+	//private int quantity;
 	
 	public Long getId() {
 		return id;
@@ -47,6 +48,14 @@ public class Item {
 	
 	public void setItemCost(int itemCost) {
 		this.itemCost = itemCost;
+	}
+	
+	public int getWeight() {
+		return weight;
+	}
+	
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	
 }
