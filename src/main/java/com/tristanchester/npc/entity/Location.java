@@ -6,6 +6,7 @@ public class Location {
 	private String description;
 	private int age;
 	private int size;
+	private int populationSize;
 	
 	public String getName() {
 		return name;
@@ -37,6 +38,14 @@ public class Location {
 	
 	public void setSize(int size) {
 		this.size = size;
+	}
+	
+	public int getPopulationSize() {
+		return populationSize;
+	}
+	
+	public void setPopulationSize(int populationSize) {
+		this.populationSize = populationSize;
 	}
 	
 }
