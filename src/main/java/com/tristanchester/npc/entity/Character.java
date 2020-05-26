@@ -1,5 +1,13 @@
 package com.tristanchester.npc.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.tristanchester.npc.util.CharacterType;
 import com.tristanchester.npc.util.Level;
 
 public class Character {
@@ -7,11 +15,14 @@ public class Character {
 	private Long id;
 	private String name;
 	private int age;
-	private Location currentLocation; 
+	private Location location; 
 	private Level level;
-	private Inventory inventory;
+	private Inventory inventory; //refer to inventory_id foreign key in character table
+	private CharacterType type;
 //	private Alignment alignment;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -36,12 +47,14 @@ public class Character {
 		this.age = age;
 	}
 	
-	public Location getCurrentLocation() {
-		return currentLocation;
+	//Many characters can share one location
+	@ManyToOne(cascade = CascadeType.ALL) //TODO allow metaphysics?
+	public Location getLocation() {
+		return location;
 	}
 	
-	public void setCurrentLocation(Location currentLocation) {
-		this.currentLocation = currentLocation;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	public Level getLevel() {
@@ -52,12 +65,21 @@ public class Character {
 		this.level = level;
 	}
 	
+	@OneToOne(mappedBy = "character")
 	public Inventory getInventory() {
 		return inventory;
 	}
 	
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
+	}
+	
+	public CharacterType getType() {
+		return type;
+	}
+	
+	public void setType(CharacterType type) {
+		this.type = type;
 	}
 	
 }
