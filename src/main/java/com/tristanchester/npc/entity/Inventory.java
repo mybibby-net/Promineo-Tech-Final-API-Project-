@@ -2,15 +2,25 @@ package com.tristanchester.npc.entity;
 
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Inventory {
 	
 	private Long id;
 	private int size; //Standard size is 28 "slots"
-	private Set<Item> items;
-	private String owner; //Equal to Character name
+	private Set<Item> contents; //Renamed from "items"
 	private int netWorth; //in "gold"
 	private int weight; //in lbs
 	
+	@JsonIgnore
+	private Character owner;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -27,19 +37,19 @@ public class Inventory {
 		this.size = size;
 	}
 	
-	public Set<Item> getItems() {
-		return items;
+	public Set<Item> getContents() {
+		return contents;
 	}
 	
-	public void setItems(Set<Item> items) {
-		this.items = items;
+	public void setContents(Set<Item> contents) {
+		this.contents = contents;
 	}
 	
-	public String getOwner() {
+	public Character getOwner() {
 		return owner;
 	}
 	
-	public void setOwner(String owner) {
+	public void setOwner(Character owner) {
 		this.owner = owner;
 	}
 	
