@@ -3,6 +3,7 @@ package com.tristanchester.npc.controller;
 import com.tristanchester.npc.service.ItemService;
 import com.tristanchester.npc.entity.Item;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Service
 public class ItemController {
 	
+	@Autowired
 	private ItemService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
