@@ -4,11 +4,10 @@ public class Item {
 	
 	private Long id;
 	private String name;
-	private String itemDescription;
-	private int statModifier;
-	private int itemCost;
+	private String description;
+//	private int statModifier; //TODO: Create Stat and Modifier system
+	private int cost;
 	private int weight;
-	//private int quantity;
 	
 	public Long getId() {
 		return id;
@@ -22,32 +21,32 @@ public class Item {
 		return name;
 	}
 	
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public String getItemDescription() {
-		return itemDescription;
+	public String getDescription() {
+		return description;
 	}
 	
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
-	public int getStatModifier() {
-		return statModifier;
+//	public int getStatModifier() {
+//		return statModifier;
+//	}
+//	
+//	public void setStatModifier(int statModifier) {
+//		this.statModifier = statModifier;
+//	}
+	
+	public int getCost() {
+		return cost;
 	}
 	
-	public void setStatModifier(int statModifier) {
-		this.statModifier = statModifier;
-	}
-	
-	public int getItemCost() {
-		return itemCost;
-	}
-	
-	public void setItemCost(int itemCost) {
-		this.itemCost = itemCost;
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 	
 	public int getWeight() {
@@ -59,12 +58,3 @@ public class Item {
 	}
 	
 }
-/* 
- * Item Properties:
- * 	
- * Name: String
- * Description: String
- * StatModifier: int
- * Cost: int
- * 
- */
