@@ -8,28 +8,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Service
 public class ItemController {
-	//TODO: Add Request Mappings
+	
 	private ItemService service;
 	
-	//Map GET
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getAllItems() {
 		return new ResponseEntity<Object>(
 				service.getAllItems(), HttpStatus.OK
 				);
 	}
 	
-	//Map POST
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createItem(@RequestBody Item item) {
 		return new ResponseEntity<Object>(
 				service.createItem(item), HttpStatus.CREATED
 				);
 	}
 	
-	//Map PUT
+	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Object> modifyItem(@RequestBody Item item, @PathVariable Long id) {
 		try {
 			return new ResponseEntity<Object>(
@@ -42,7 +44,7 @@ public class ItemController {
 		}
 	}
 	
-	//Map DELETE
+	@RequestMapping(method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteItem(@PathVariable Long id) {
 		try {
 			service.removeItem(id);
