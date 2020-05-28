@@ -1,5 +1,86 @@
 package com.tristanchester.npc.controller;
 
-public class ItemController {
+import com.tristanchester.npc.service.ItemService;
+import com.tristanchester.npc.entity.Item;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@Service
+public class ItemController {
+	//TODO: Add Request Mappings
+	private ItemService service;
+	
+	//Map GET
+	public ResponseEntity<Object> getAllItems() {
+		return new ResponseEntity<Object>(
+				service.getAllItems(), HttpStatus.OK
+				);
+	}
+	
+	//Map POST
+	public ResponseEntity<Object> createItem(@RequestBody Item item) {
+		return new ResponseEntity<Object>(
+				service.createItem(item), HttpStatus.CREATED
+				);
+	}
+	
+	//Map PUT
+	public ResponseEntity<Object> modifyItem(@RequestBody Item item, @PathVariable Long id) {
+		try {
+			return new ResponseEntity<Object>(
+					service.modifyItem(item, id), HttpStatus.OK
+					);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(
+					"Unable to modify the item", HttpStatus.BAD_REQUEST
+					);
+		}
+	}
+	
+	//Map DELETE
+	public ResponseEntity<Object> deleteItem(@PathVariable Long id) {
+		try {
+			service.removeItem(id);
+			return new ResponseEntity<Object>(
+					"Successfully removed item with id: " + id, HttpStatus.OK
+					);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(
+					"Unable to remove item", HttpStatus.BAD_REQUEST
+					);
+		}
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
