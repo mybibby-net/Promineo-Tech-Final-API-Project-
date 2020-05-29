@@ -1,14 +1,28 @@
 package com.tristanchester.npc.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Location {
 	
 	private Long id;
 	private String name;
 	private String description;
 	private int age;
-	private int size;
+	private int landSize;
 	private int populationSize;
 	
+	@JsonIgnore
+	private Character character; //A single location can "contain" many Characters
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -41,12 +55,12 @@ public class Location {
 		this.age = age;
 	}
 	
-	public int getSize() {
-		return size;
+	public int getLandSize() {
+		return landSize;
 	}
 	
-	public void setSize(int size) {
-		this.size = size;
+	public void setLandSize(int landSize) {
+		this.landSize = landSize;
 	}
 	
 	public int getPopulationSize() {
@@ -57,11 +71,13 @@ public class Location {
 		this.populationSize = populationSize;
 	}
 	
+	@OneToMany(mappedBy = "location")
+	public Character getCharacter() {
+		return character;
+	}
+	
+	public void setCharacter(Character character) {
+		this.character = character;
+	}
+	
 }
-/*
- * Location properties:
- *	 Name: String
- *	 LocationDescription: String
- *	 LocationAge: int
- *	 SizeInKm: int
- */
