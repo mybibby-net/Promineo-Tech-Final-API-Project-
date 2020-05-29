@@ -12,23 +12,20 @@ import com.tristanchester.npc.repository.ItemRepo;
 @Service
 public class ItemService {
 	//TODO: Add aditional logic for items, make more elaborate
-	
+
 	private final static Logger logger = LogManager.getLogger(ItemService.class);
 	
 	@Autowired
 	private ItemRepo repo;
 	
-	//Read
 	public Iterable<Item> getAllItems() {
 		return repo.findAll();
 	}
 	
-	//Create
 	public Item createItem(Item item) {
 		return repo.save(item);
 	}
 	
-	//Update
 	public Item modifyItem(Item item, Long id) throws Exception {
 		try {
 			Item original = repo.findOne(id);
@@ -51,7 +48,6 @@ public class ItemService {
 		}
 	}
 	
-	//Delete
 	public void removeItem(Long id) throws Exception{
 		try {
 			repo.delete(id);
