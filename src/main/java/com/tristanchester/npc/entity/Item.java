@@ -1,14 +1,18 @@
 package com.tristanchester.npc.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Item {
 	
 	private Long id;
 	private String name;
 	private String description;
-//	private int statModifier; //TODO: Create Stat and Modifier system
 	private int cost;
 	private int weight;
+//	private int statModifier; //TODO: Create Stat and Modifier system
 	
+	//TODO 2 todo boogaloo: add annotations for SQL relationships in all classes
 	public Long getId() {
 		return id;
 	}
