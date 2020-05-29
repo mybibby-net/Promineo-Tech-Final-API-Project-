@@ -13,23 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tristanchester.npc.service.InventoryService;
 
 @RestController
-//@RequestMapping("") //Resolve mapping issue, see block comment
+//@RequestMapping("") 
 public class InventoryController {
+	
+	
 	
 }
 /*
- * TODO: Review to see if necessary to create inventory controller
- * 	ALL characters will have an inventory, therefore can be updated
- * 	via NPC or PlayerCharacter controllers instead
- * 	
- * Solution 1: Create two seperate REST controllers for Player/NPC inventories
- * 	and map each accordingly
- * 
- * Solution 2: Merge PlayeCharacter and NPC's into one character class,
- * 	then create a "characterType" or equivalent var to differentiate the two
- * 	
- * Reasoning: using @RequestMapping("../../..") would result in some REST weirdness
- * 	with current program class configurations regarding differences between
- * 	PlayerCharacters and NPC's, which while nearly identical, are different classes
- * 
+ *Merged PlayerCharacter, NPC and related files into Character class, service, util 
  */

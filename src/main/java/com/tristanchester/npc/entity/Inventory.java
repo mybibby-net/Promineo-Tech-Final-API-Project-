@@ -13,8 +13,8 @@ public class Inventory {
 	private Long id;
 	private int size; //Standard size is 28 "slots"
 	private Set<Item> contents; //Renamed from "items"
-	private int netWorth; //in "gold"
-	private int weight; //in lbs
+	private int worth;
+	private int weight;
 	
 	@JsonIgnore
 	private Character owner;
@@ -53,12 +53,12 @@ public class Inventory {
 		this.owner = owner;
 	}
 	
-	public int getNetWorth() {
-		return netWorth;
+	public int getWorth() {
+		return worth;
 	}
 	
-	public void setNetWorth(int netWorth) {
-		this.netWorth = netWorth;
+	public void setWorth(int worth) {
+		this.worth = worth;
 	}
 	
 	public int getWeight() {
