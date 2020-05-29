@@ -16,7 +16,10 @@ public class Inventory {
 	private int size; //Standard size is 28 "slots", limits total item quantity
 	private Set<Item> items; //Renamed from "Contents"
 	
-	@JsonIgnore //See inventoryService
+	@JsonIgnore
+	private Item item;
+	
+	@JsonIgnore //See TODO's
 	private int worth;
 	
 	@JsonIgnore
@@ -75,6 +78,15 @@ public class Inventory {
 	//See Above
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	//These are for getting and setting only one item instead of a set of them at a time if needed
+	public Item getItem() {
+		return item;
+	}
+	
+	public void setItem(Item item) {
+		this.item = item;
 	}
 	
 }
