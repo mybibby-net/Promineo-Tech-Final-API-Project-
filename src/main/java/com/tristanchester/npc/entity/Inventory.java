@@ -2,18 +2,24 @@ package com.tristanchester.npc.entity;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Inventory {
 	
 	private Long id;
-	private int size; //Standard size is 28 "slots"
-	private Set<Item> contents; //Renamed from "items"
+	private int size; //Standard size is 28 "slots", limits total item quantity
+	private Set<Item> items; //Renamed from "Contents"
+	
+	@JsonIgnore //See inventoryService
 	private int worth;
+	
+	@JsonIgnore
 	private int weight;
 	
 	@JsonIgnore
@@ -37,12 +43,12 @@ public class Inventory {
 		this.size = size;
 	}
 	
-	public Set<Item> getContents() {
-		return contents;
+	public Set<Item> getItems() {
+		return items;
 	}
 	
-	public void setContents(Set<Item> contents) {
-		this.contents = contents;
+	public void setItems(Set<Item> items) {
+		this.items = items;
 	}
 	
 	public Character getOwner() {
@@ -53,18 +59,20 @@ public class Inventory {
 		this.owner = owner;
 	}
 	
+	//TODO: Consider removing these, perform inventory worth calculations in service
 	public int getWorth() {
 		return worth;
 	}
-	
+	//See Above
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
 	
+	//TODO: Consider removing, perform inventory weight calculation in service
 	public int getWeight() {
 		return weight;
 	}
-	
+	//See Above
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
