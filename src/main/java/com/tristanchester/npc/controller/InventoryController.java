@@ -23,8 +23,7 @@ public class InventoryController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createInventory (
-			@RequestBody Set<Long> itemIds, @PathVariable Long ownerId
-			) {
+			@RequestBody Set<Long> itemIds, @PathVariable Long ownerId) {
 		try {
 			return new ResponseEntity<Object>(
 					service.initializeNewEmptyInventory(ownerId), HttpStatus.CREATED
@@ -36,7 +35,7 @@ public class InventoryController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateInventory(
 			@RequestBody Inventory inventory, @PathVariable Long ownerId
 			) {
