@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Inventory {
 	
 	private Long id;
-	private int size; //Standard size is 28 "slots", limits total item quantity
-	private Set<Item> items; //Renamed from "Contents"
+	private int size; //Standard size is 28 "slots", limits item set size
+	private Set<Item> items;
 	
 	@JsonIgnore
 	private Item item;
@@ -46,6 +49,7 @@ public class Inventory {
 		this.size = size;
 	}
 	
+	@ManyToMany(mappedBy = "inventory")
 	public Set<Item> getItems() {
 		return items;
 	}
@@ -58,6 +62,8 @@ public class Inventory {
 		return owner;
 	}
 	
+	@OneToOne
+	@JoinColumn(name = "ownerId")
 	public void setOwner(Character owner) {
 		this.owner = owner;
 	}
@@ -71,22 +77,13 @@ public class Inventory {
 		this.worth = worth;
 	}
 	
-	//TODO: Consider removing, perform inventory weight calculation in service
+	
 	public int getWeight() {
 		return weight;
 	}
-	//See Above
+	
 	public void setWeight(int weight) {
 		this.weight = weight;
-	}
-	
-	//These are for getting and setting only one item instead of a set of them at a time if needed
-	public Item getItem() {
-		return item;
-	}
-	
-	public void setItem(Item item) {
-		this.item = item;
 	}
 	
 }

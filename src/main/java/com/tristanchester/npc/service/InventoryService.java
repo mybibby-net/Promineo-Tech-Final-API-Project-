@@ -37,8 +37,6 @@ public class InventoryService {
 				characterRepo.findOne(ownerId)
 				);
 		inventory.setSize(inventorySize); //28 as default size, think "slots"
-//TODO: Needed? Probably not. use setItems() to update/add items elsewhere?
-//		inventory.setItems(null); 
 		return inventory;
 	}
 	
@@ -59,24 +57,6 @@ public class InventoryService {
 		}
 	}
 	
-	//Updating/adding use setItems() ?
-	public void addSingleItemToInventory(Inventory inventory, Long itemId) {
-		if (inventory.getSize() < 28) {
-			try {
-				inventory.setItem(
-						itemRepo.findOne(itemId)
-						);
-			} catch (Exception e) {
-				
-			}
-		}
-		
-	}
-	
-	public void addMultipleItemsToInventory() {
-		
-	}
-	
 	public Set<Item> convertToItemSet(Iterable<Item> iterableItem) {
 		Set<Item> itemSet = new HashSet<Item>();
 		for (Item item : iterableItem) {
@@ -85,19 +65,24 @@ public class InventoryService {
 		return itemSet;
 	}
 	
+	public int calculateNetWorth(Set<Item> items) {
+		int worth = 0; //Inventory Initial Value
+		for (Item item : items) {
+			worth += item.getCost();
+		}
+		return worth;
+	}
+	
 }
 /*
  *  Inventory Initialization:
- *    1. Method to take items and convert to set for storage in inventory object
- *    
  *    TODO: 
- *    		1. write system for worth calculation
  *    		2. write system for weight calculation
  *    		3. write system for inventory weight 
  *    		   and physical space (size) limits
  *    		Use Iterable<Item> for these?
  */
- //TODO: Idea for later: Write a rudimentary skill + skill level system instead of (or paired with) current Enum sytem
+
 	
 
 
