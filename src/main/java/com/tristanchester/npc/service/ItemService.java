@@ -11,7 +11,7 @@ import com.tristanchester.npc.repository.ItemRepo;
 
 @Service
 public class ItemService {
-	//TODO: Add aditional logic for items, make more elaborate
+	//TODO: Add additional logic for items, make more elaborate
 
 	private final static Logger logger = LogManager.getLogger(ItemService.class);
 	
@@ -30,20 +30,16 @@ public class ItemService {
 		try {
 			Item original = repo.findOne(id);
 			original.setName(
-					item.getName()
-					);
+					item.getName());
 			original.setDescription(
-					item.getDescription()
-					);
+					item.getDescription());
 			original.setCost(
-					item.getCost()
-					);
+					item.getCost());
 			original.setWeight(
-					item.getWeight()
-					);
+					item.getWeight());
 			return repo.save(original);
 		} catch (Exception e) {
-			logger.error("Exception occured while attempting to modify item: " + id, e);
+			logger.error("Exception occurred while attempting to modify item: " + id, e);
 			throw new Exception("Unable to modify item");
 		}
 	}
@@ -52,7 +48,7 @@ public class ItemService {
 		try {
 			repo.delete(id);
 		} catch (Exception e) {
-			logger.error("Exception occured while trying to remove item: " + id, e);
+			logger.error("Exception occurred while trying to remove item: " + id, e);
 			throw new Exception("Unable to remove item");
 		}
 	}
