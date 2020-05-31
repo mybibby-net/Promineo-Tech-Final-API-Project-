@@ -1,15 +1,8 @@
 package com.tristanchester.npc.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.tristanchester.npc.util.CharacterType;
-//import com.tristanchester.npc.util.Level;
 
 @Entity
 public class Character {
@@ -17,21 +10,15 @@ public class Character {
 	private Long id;
 	private String name;
 	private int age;
-	private Location location; 
-//	private Level level;
-	private Inventory inventory; //refer to inventory_id foreign key in character table
+	private Location location;
+	private Inventory inventory;
 	private CharacterType type;
-	
-	//create character stats class?? 
 	private int health;
 	private int strength;
 	private int stamina;
 	private int intellect;
 	private int charisma;
-	
-	
-//	private Alignment alignment;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -100,7 +87,8 @@ public class Character {
 		this.charisma = charisma;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL) //TODO allow metaphysics?
+	@ManyToOne(cascade = CascadeType.ALL) //many characters to one location
+	@JoinColumn(name = "id")
 	public Location getLocation() {
 		return location;
 	}
@@ -109,15 +97,7 @@ public class Character {
 		this.location = location;
 	}
 	
-//	public Level getLevel() {
-//		return level;
-//	}
-//	
-//	public void setLevel(Level level) {
-//		this.level = level;
-//	}
-	
-	@OneToOne(mappedBy = "character")
+	@OneToOne(mappedBy = "character")//Only one Customer to one Inventory
 	public Inventory getInventory() {
 		return inventory;
 	}
@@ -135,6 +115,4 @@ public class Character {
 	}
 	
 }
-
-//TODO: remove previous level file enum
 
