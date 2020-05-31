@@ -19,9 +19,6 @@ public class Inventory {
 	private int size; //Standard size is 28 "slots", limits item set size
 	private Set<Item> items;
 	
-	@JsonIgnore
-	private Item item;
-	
 	@JsonIgnore //See TODO's
 	private int worth;
 	
@@ -67,16 +64,14 @@ public class Inventory {
 	public void setOwner(Character owner) {
 		this.owner = owner;
 	}
-	
-	//TODO: Consider removing these, perform inventory worth calculations in service
+
 	public int getWorth() {
 		return worth;
 	}
-	//See Above
+
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
-	
 	
 	public int getWeight() {
 		return weight;

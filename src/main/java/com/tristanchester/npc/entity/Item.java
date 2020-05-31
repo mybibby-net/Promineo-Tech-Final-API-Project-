@@ -1,6 +1,8 @@
 package com.tristanchester.npc.entity;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Item {
@@ -10,9 +12,13 @@ public class Item {
 	private String description;
 	private int cost;
 	private int weight;
-//	private int statModifier; //TODO: Create Stat and Modifier system
-	
-	//TODO 2 todo boogaloo: add annotations for SQL relationships in all classes
+	private int statModifier;
+
+	@JsonIgnore
+	private Inventory inventory;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -37,13 +43,9 @@ public class Item {
 		this.description = description;
 	}
 	
-//	public int getStatModifier() {
-//		return statModifier;
-//	}
-//	
-//	public void setStatModifier(int statModifier) {
-//		this.statModifier = statModifier;
-//	}
+	public int getStatModifier() { return statModifier; } //TODO: Add stat system to ItemService
+
+	public void setStatModifier(int statModifier) { this.statModifier = statModifier; }
 	
 	public int getCost() {
 		return cost;
@@ -60,5 +62,10 @@ public class Item {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	public Inventory getInventory() { return inventory; }
+
+	public void setInventory(Inventory inventory) { this.inventory = inventory; }
+
 }
