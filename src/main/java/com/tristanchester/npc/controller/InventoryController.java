@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tristanchester.npc.entity.Inventory;
+import com.tristanchester.npc.service.CharacterService;
 import com.tristanchester.npc.service.InventoryService;
 
 @RestController
@@ -20,31 +21,31 @@ public class InventoryController {
 	
 	@Autowired
 	private InventoryService service;
-	
+
+	private ;
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createInventory (
 			@RequestBody Set<Long> itemIds, @PathVariable Long ownerId) {
 		try {
 			return new ResponseEntity<Object>(
-					service.initializeNewEmptyInventory(ownerId), HttpStatus.CREATED
-					);
+					service.createNewInventory(), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(
-					e, HttpStatus.BAD_REQUEST
-					);
+					e, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateInventory(
-			@RequestBody Inventory inventory, @PathVariable Long ownerId
-			) {
+			@RequestBody Inventory inventory, @PathVariable Long inventoryId) {
 		try {
-			
+			//TODO: figure this out
+			return null;
 		} catch (Exception e) {
-			
+			return null;
 		}
-		return null;
+
 	}
 	
 }
