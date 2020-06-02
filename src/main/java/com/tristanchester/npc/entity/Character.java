@@ -86,18 +86,18 @@ public class Character {
 	public void setCharisma(int charisma) {
 		this.charisma = charisma;
 	}
+	//TODO: Uncomment when location system is finished
+//	@ManyToOne(cascade = CascadeType.ALL) //many characters to one location
+//	@JoinColumn(name = "id")
+//	public Location getLocation() {
+//		return location;
+//	}
 	
-	@ManyToOne(cascade = CascadeType.ALL) //many characters to one location
-	@JoinColumn(name = "id")
-	public Location getLocation() {
-		return location;
-	}
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
 	
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-	
-	@OneToOne(mappedBy = "character")//Only one Customer to one Inventory
+	@OneToOne(mappedBy = "owner")//Only one Customer to one Inventory
 	public Inventory getInventory() {
 		return inventory;
 	}
