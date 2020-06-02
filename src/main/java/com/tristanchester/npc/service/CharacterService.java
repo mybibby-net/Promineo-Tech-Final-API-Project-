@@ -41,7 +41,7 @@ public class CharacterService {
 		return repo.save(character);
 	}
 
-	//TODO: Add Character stats to modify
+	//TODO: Add Character stats to modify NOTE: setInventory() has not been implemented in this method, consider removing inventory logic
 	//Takes character arg, when called will check amount of items within character's inventory to ensure limits aren't broken
 	public Character modifyCharacterInfo(Character character) throws Exception {
 			if (character.getInventory().getItems().size() > character.getInventory().getSize()) {
