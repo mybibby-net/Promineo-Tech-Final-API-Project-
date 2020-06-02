@@ -22,32 +22,43 @@ public class InventoryController {
 	@Autowired
 	private InventoryService service;
 
-	private ;
-
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createInventory (
 			@RequestBody Set<Long> itemIds, @PathVariable Long ownerId) {
 		try {
 			return new ResponseEntity<Object>(
-					service.createNewInventory(), HttpStatus.CREATED);
+					service.createNewInventory(ownerId), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(
 					e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateInventory(
-			@RequestBody Inventory inventory, @PathVariable Long inventoryId) {
-		try {
-			//TODO: figure this out
-			return null;
-		} catch (Exception e) {
-			return null;
-		}
 
+	//TODO: use 2 PUT Methods to ADD and REMOVE items from a player's inventory
+//	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
+//	public ResponseEntity<Object> updateInventory(
+//			@RequestBody Inventory inventory, @PathVariable Long inventoryId) {
+//		try {
+//			//return new ResponseEntity<Object>(service.addItems(itemId), HttpStatus.OK);
+//			return null;
+//		} catch (Exception e) {
+//			return null;
+//		}
+//
+//	}
+
+	//PUT: Adds set of item id's to inventory
+	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
+	public ResponseEntity<Object> addToInventory(
+			@RequestBody Set<Long> itemIds, @PathVariable Long inventoryId) {
+		try {
+			return new ResponseEntity<Object>(
+					service.addItems(itemIds, inventoryId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(
+					e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
-	
 }
 
 
