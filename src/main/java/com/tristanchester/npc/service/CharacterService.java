@@ -44,33 +44,19 @@ public class CharacterService {
 	//TODO: Add Character stats to modify NOTE: setInventory() has not been implemented in this method, consider removing inventory logic
 	//Takes character arg, when called will check amount of items within character's inventory to ensure limits aren't broken
 	public Character modifyCharacterInfo(Character character) throws Exception {
-			if (character.getInventory().getItems().size() > character.getInventory().getSize()) {
-				try {
-					Character original = repo.findOne(character.getId());
-					original.setName(character.getName());
-					original.setAge(character.getAge());
-					original.setType(character.getType());
-					original.setLocation(character.getLocation());
-					repo.save(original);
-					return original;
-				} catch (Exception e) {
-					logger.error("Exception occurred while trying to modify character: " + character.getId() + e);
-					throw new Exception("Unable to modify character information");
-				}
-			} else {
-				try {
-					Character original = repo.findOne(character.getId());
-					original.setName(character.getName());
-					original.setAge(character.getAge());
-					original.setType(character.getType());
-					original.setLocation(character.getLocation());
-					repo.save(original);
-					return original;
-				} catch (Exception e) {
-			logger.error("Exception occurred while trying to modify character: " + character.getId() + e);
-			throw new Exception("Unable to modify character information");
-				}
+		try {
+			Character original = repo.findOne(character.getId());
+			original.setName(character.getName());
+			original.setAge(character.getAge());
+			original.setType(character.getType());
+//			original.setLocation(character.getLocation());
+			repo.save(original);
+			return original;
+			} catch (Exception e) {
+				logger.error("Exception occurred while trying to modify character: " + character.getId() + e);
+				throw new Exception("Unable to modify character information");
 			}
+
 	}
 
 //	public void initInventory(Long id) {
