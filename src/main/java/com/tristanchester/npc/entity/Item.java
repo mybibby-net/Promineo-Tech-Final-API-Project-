@@ -63,9 +63,12 @@ public class Item {
 		this.weight = weight;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Inventory getInventory() { return inventory; }
 
 	public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
 }
+//TODO:
+// Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements:
+// 	com.tristanchester.npc.entity.Item.inventory

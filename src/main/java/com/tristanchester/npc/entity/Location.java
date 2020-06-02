@@ -1,5 +1,7 @@
 package com.tristanchester.npc.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class Location {
 	private int populationSize;
 	
 	@JsonIgnore
-	private Character character; //A single location can "contain" many Characters
+	private Set<Long> characterIds; //A single location can "contain" many Characters
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,13 +77,14 @@ public class Location {
 //		this.populationSize = populationSize;
 //	}
 	
-	@OneToMany(mappedBy = "location")
-	public Character getCharacter() {
-		return character;
-	}
-	
-	public void setCharacter(Character character) {
-		this.character = character;
-	}
+//	@OneToMany(mappedBy = "location")
+//	public Set<Long> getCharacters() {
+//		return characterIds;
+//	}
+
+	//TODO: uncomment when location and character system complete
+//	public void setCharacters(Character character) {
+//		this.character = character;
+//	}
 	
 }
