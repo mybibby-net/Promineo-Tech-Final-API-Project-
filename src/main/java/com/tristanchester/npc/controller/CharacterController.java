@@ -25,7 +25,7 @@ public class CharacterController {
 				service.createCharacter(character), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/characters/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCharacter(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<Object>(
@@ -35,18 +35,18 @@ public class CharacterController {
 					e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Object> getAllCharacters() {
-		return new ResponseEntity<Object>(
-				service.getCharacters(), HttpStatus.OK);
-	}
+	//TODO: Implement retreival of ALL characters (convert characters into set and return?)
+//	@RequestMapping(method = RequestMethod.GET)
+//	public ResponseEntity<Object> getAllCharacters() {
+//		return new ResponseEntity<Object>(
+//				service.getCharacters(), HttpStatus.OK);
+//	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Object> modifyCharacter(@RequestBody Character character, @PathVariable Long id) throws Exception {
 		try {
 			return new ResponseEntity<Object>(
-					service.modifyCharacterInfo(character, id), HttpStatus.OK);
+					service.modifyCharacterInfo(character), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(
 					e.getMessage(), HttpStatus.NOT_FOUND);
