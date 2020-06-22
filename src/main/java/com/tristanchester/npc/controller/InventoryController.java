@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tristanchester.npc.entity.Inventory;
-import com.tristanchester.npc.service.CharacterService;
 import com.tristanchester.npc.service.InventoryService;
 
 @RestController
@@ -44,21 +43,20 @@ public class InventoryController {
 //		} catch (Exception e) {
 //			return null;
 //		}
-//
 //	}
 
 	//PUT: Adds set of item id's to inventory
 	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
 	public ResponseEntity<Object> addToInventory(
 			@RequestBody Set<Long> itemIds, @PathVariable Long inventoryId) {
-		try {
-			return new ResponseEntity<Object>(
+			try {
+				return new ResponseEntity<Object>(
 					service.addItems(itemIds, inventoryId), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Object>(
+			} catch (Exception e) {
+				return new ResponseEntity<Object>(
 					e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
 		}
-	}
 }
 
 

@@ -82,10 +82,11 @@ public class Character {
 		return charisma;
 	}
 	
-	//Modifies item "sell costs"
+	//Modifies item costs, consider prototyping basic selling system
 	public void setCharisma(int charisma) {
 		this.charisma = charisma;
 	}
+
 	//TODO: Uncomment when location system is finished
 //	@ManyToOne(cascade = CascadeType.ALL) //many characters to one location
 //	@JoinColumn(name = "id")
@@ -101,7 +102,7 @@ public class Character {
 	public Inventory getInventory() {
 		return inventory;
 	}
-	
+
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}

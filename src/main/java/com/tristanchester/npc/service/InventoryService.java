@@ -45,7 +45,7 @@ public class InventoryService {
 	public Inventory addItems(Set<Long> itemIds, Long ownerId) throws Exception {
 		// Call for PUT Takes character inventory size int, checks if it's lower than the overall size of the inventory (default 28),
 		// then allows operation if meets condition, changed from if to while
-		if (itemIds.size() < characterRepo.findOne(ownerId).getInventory().getSize()) {
+		//if (itemIds.size() < characterRepo.findOne(ownerId).getInventory().getSize()) {
 			try {
 				Character owner = characterRepo.findOne(ownerId);
 				Inventory originalInventory = owner.getInventory();
@@ -58,9 +58,9 @@ public class InventoryService {
 				throw new Exception("Unable to add to inventory");
 			}
 
-		} else {
-			return null; //TODO: cross fingers and hope this works
-		}
+//		} else {
+//			return null; //TODO: cross fingers and hope this works
+//		}
 	}
 
 	public Set<Item> convertItemsToSet(Iterable<Item> iterableItem) {

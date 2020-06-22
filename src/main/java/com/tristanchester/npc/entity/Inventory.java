@@ -20,7 +20,7 @@ public class Inventory {
 	private int size; //Standard size is 28 "slots", limits item set size
 	private Set<Item> items;
 	
-	@JsonIgnore //See TODO's
+	@JsonIgnore
 	private int worth;
 	
 	@JsonIgnore
@@ -47,13 +47,10 @@ public class Inventory {
 		this.size = size;
 	}
 
-	//TODO: Unable to build Hibernate SessionFactory:
-	// 	mappedBy reference an unknown target entity property:
-	// 		com.tristanchester.npc.entity.Item.inventory in com.tristanchester.npc.entity.Inventory.items
 	@OneToMany(mappedBy = "inventory")
 	public Set<Item> getItems() {
 		return items;
-	}
+	} // should this be a Set<Long> to get the item Id's instead? Maybe include another getter/setter for it
 	
 	public void setItems(Set<Item> items) {
 		this.items = items;
@@ -64,7 +61,6 @@ public class Inventory {
 	public Character getOwner() {
 		return owner;
 	}
-	
 
 	public void setOwner(Character owner) {
 		this.owner = owner;

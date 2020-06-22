@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Location {
-	//TODO: Create Location Service and Controller, Consider "storing" all character, items, etc within the specified region?
+	//TODO: Create Location Service and Controller, Consider "storing" all character, items, etc within the specified region? (Use Location as a container?)
 	
 	private Long id;
 	private String name;
