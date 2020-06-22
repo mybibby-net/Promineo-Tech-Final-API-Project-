@@ -72,3 +72,4 @@ public class Item {
 //TODO:
 // Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements:
 // 	com.tristanchester.npc.entity.Item.inventory
+//Check to see if above has been resolved
