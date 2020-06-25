@@ -25,7 +25,7 @@ public class CharacterService {
 	private InventoryRepo inventoryRepo;
 //	private InventoryService inventoryService;
 	
-	public Character getCharacterById(Long id) {
+	public Character getCharacterById(Long id) throws Exception {
 		try {
 			return repo.findOne(id);
 		} catch (Exception e) {
@@ -58,15 +58,6 @@ public class CharacterService {
 			}
 
 	}
-
-//	public void initInventory(Long id) {
-//		Inventory inventory = new Inventory();
-//		inventory.setItems(null);
-//		inventory.setOwner(repo.findOne(id));
-//		inventory.setSize(28); //28 as default size, think "slots"
-//		inventory.setWorth(0);
-//		inventory.setWeight(0);
-//	}
 	
 	public void removeCharacter(Long id) throws Exception {
 		try {

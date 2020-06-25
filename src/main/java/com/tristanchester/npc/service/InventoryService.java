@@ -31,21 +31,27 @@ public class InventoryService {
 
 	//TODO: consider prototyping a combination of initialization and submission hybrid method for create of new inventories?
 	//Call for POST Sets default values, associates character, doesn't set times.
-	public Inventory createNewInventory(Long ownerId) {
-		Inventory inventory = new Inventory();
-		inventory.setOwner(
+	public Inventory createNewInventory(Set<Long> itemIds, Long ownerId) throws Exception{
+		try {
+			Character owner = characterRepo.findOne(ownerId);
+			Inventory inventory = new Inventory();
+			inventory.setOwner(
 				characterRepo.findOne(ownerId));
-		inventory.setSize(28); //28 as default size, think "slots"
-		inventory.setWorth(0);
-		inventory.setWeight(0);
-		return repo.save(inventory);
+			inventory.setItems(
+					convertItemsToSet(itemRepo.findAll(itemIds))
+					);
+			inventory.setSize(28); //28 as default size, think "slots"
+			inventory.setWorth(inventory.getWorth());
+			inventory.setWeight(inventory.getWeight());
+			return repo.save(inventory); 
+		} catch (Exception e) {
+			logger.error("Exception occured while trying to create a new inventory for character:" + ownerId, e);
+			throw new Exception("Unable to create inventory");
+		}
 	}
 
 //	TODO: uncomment if new method syntax fails
 	public Inventory addItems(Set<Long> itemIds, Long ownerId) throws Exception {
-		// Call for PUT Takes character inventory size int, checks if it's lower than the overall size of the inventory (default 28),
-		// then allows operation if meets condition, changed from if to while
-		//if (itemIds.size() < characterRepo.findOne(ownerId).getInventory().getSize()) {
 			try {
 				Character owner = characterRepo.findOne(ownerId);
 				Inventory originalInventory = owner.getInventory();
@@ -58,9 +64,6 @@ public class InventoryService {
 				throw new Exception("Unable to add to inventory");
 			}
 
-//		} else {
-//			return null; //TODO: cross fingers and hope this works
-//		}
 	}
 
 	public Set<Item> convertItemsToSet(Iterable<Item> iterableItem) {
