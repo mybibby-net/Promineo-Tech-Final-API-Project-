@@ -23,31 +23,19 @@ public class InventoryController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createInventory (
-			@RequestBody Set<Long> itemIds, @PathVariable Long ownerId) {
+			@RequestBody Set<Long> itemIds, @PathVariable Long id) {
 		try {
 			return new ResponseEntity<Object>(
-					service.createNewInventory(ownerId), HttpStatus.CREATED);
+					service.createNewInventory(itemIds, id), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(
 					e, HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	//TODO: use 2 PUT Methods to ADD and REMOVE items from a player's inventory
-//	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
-//	public ResponseEntity<Object> updateInventory(
-//			@RequestBody Inventory inventory, @PathVariable Long inventoryId) {
-//		try {
-//			//return new ResponseEntity<Object>(service.addItems(itemId), HttpStatus.OK);
-//			return null;
-//		} catch (Exception e) {
-//			return null;
-//		}
-//	}
-
 	//PUT: Adds set of item id's to inventory
 	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> addToInventory(
+	public ResponseEntity<Object> updateInventory(
 			@RequestBody Set<Long> itemIds, @PathVariable Long inventoryId) {
 			try {
 				return new ResponseEntity<Object>(
