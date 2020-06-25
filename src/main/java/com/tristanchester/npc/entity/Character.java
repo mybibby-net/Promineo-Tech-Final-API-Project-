@@ -45,7 +45,6 @@ public class Character {
 		this.age = age;
 	}
 	
-	//Character stats: 
 	public int getHealth() {
 		return health;
 	}
