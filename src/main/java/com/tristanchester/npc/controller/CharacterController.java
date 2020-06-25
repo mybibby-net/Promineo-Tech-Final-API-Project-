@@ -25,7 +25,7 @@ public class CharacterController {
 				service.createCharacter(character), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/characters/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCharacter(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<Object>(
