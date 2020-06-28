@@ -96,8 +96,8 @@ public class Character {
 //	public void setLocation(Location location) {
 //		this.location = location;
 //	}
-	
-	@OneToOne(mappedBy = "owner")//Only one Customer to one Inventory
+
+	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
 	public Inventory getInventory() {
 		return inventory;
 	}
