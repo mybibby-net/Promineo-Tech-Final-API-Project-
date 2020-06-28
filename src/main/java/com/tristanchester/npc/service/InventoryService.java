@@ -29,40 +29,52 @@ public class InventoryService {
 	@Autowired
 	private ItemRepo itemRepo;
 
-	//TODO: consider prototyping a combination of initialization and submission hybrid method for create of new inventories?
-	//Call for POST Sets default values, associates character, doesn't set times.
 	public Inventory createNewInventory(Set<Long> itemIds, Long ownerId) throws Exception{
 		try {
-			Character owner = characterRepo.findOne(ownerId);
+			//Character owner = characterRepo.findOne(ownerId);
 			Inventory inventory = new Inventory();
 			inventory.setOwner(
 				characterRepo.findOne(ownerId));
 			inventory.setItems(
 					convertItemsToSet(itemRepo.findAll(itemIds))
-					);
+			);
 			inventory.setSize(28); //28 as default size, think "slots"
-			inventory.setWorth(inventory.getWorth());
-			inventory.setWeight(inventory.getWeight());
+			inventory.setWorth(
+					calculateNetWorth(inventory.getItems())
+			);
+			inventory.setWeight(
+					calculateNetWeight(inventory.getItems())
+			);
 			return repo.save(inventory); 
 		} catch (Exception e) {
-			logger.error("Exception occured while trying to create a new inventory for character:" + ownerId, e);
+			logger.error("Exception occurred while trying to create a new inventory for character:" + ownerId, e);
 			throw new Exception("Unable to create inventory");
 		}
 	}
 
-//	TODO: uncomment if new method syntax fails
+	//TODO Resolve inability to use PUT requests, can't modify inventory only POST
 	public Inventory addItems(Set<Long> itemIds, Long ownerId) throws Exception {
-			try {
-				Character owner = characterRepo.findOne(ownerId);
-				Inventory originalInventory = owner.getInventory();
+		try {
+			Character owner = characterRepo.findOne(ownerId);
+			Inventory originalInventory = repo.findOne(ownerId); //changed from owner.getInventory();
+			if (originalInventory.getItems().size() < 28) {
 				originalInventory.setItems(
-						convertItemsToSet(itemRepo.findAll(itemIds)));
-				return originalInventory;
-			} catch (Exception e) {
-				logger.error(
-						"Unable to add items to inventory with id: " + ownerId, e);
-				throw new Exception("Unable to add to inventory");
+					convertItemsToSet(itemRepo.findAll(itemIds))
+				);
+				originalInventory.setWorth(
+						calculateNetWorth(originalInventory.getItems())
+				);
+				originalInventory.setWeight(
+					calculateNetWeight(originalInventory.getItems())
+				);
 			}
+			return originalInventory;
+			//If This hard limit doesn't work remove if conditional
+
+		} catch (Exception e) {
+			logger.error("Unable to add items to inventory with id: " + ownerId, e);
+			throw new Exception("Unable to add to inventory");
+		}
 
 	}
 
@@ -73,21 +85,35 @@ public class InventoryService {
 		}
 		return itemSet;
 	}
-	//Takes inventory, calls getItems() to retrieve all items, then calls size() to count all items and returns the number
-	public int getItemQuantity(Inventory inventory) { return inventory.getItems().size(); }
+
+	public int getItemQuantity(Inventory inventory) {
+		return inventory.getItems().size();
+	}
 
 	//TODO: Consider using Charisma as a discount enum
 	public int calculateNetWorth(Set<Item> items) {
-		int worth = 0; //Inventory worth Initial Value
+		int worth = 0;
 		for (Item item : items) {
 			worth += item.getCost();
 		}
 		return worth;
 	}
 
+	public int calculateNetWeight(Set<Item> items) {
+		int weight = 0;
+		for (Item item : items) {
+			weight += item.getWeight();
+		}
+		return weight;
+	}
+
 	//Used to shorten conditionals, returns remaining space (out of maximum of 28) as int
 	public int getSpaceRemaining(Inventory inventory) {
 		return inventory.getSize() - inventory.getItems().size();
+	}
+
+	public Set<Item> getInventoryById(Long id) {
+		return repo.findOne(id).getItems();
 	}
 
 }
