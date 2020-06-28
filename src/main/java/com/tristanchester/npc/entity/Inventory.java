@@ -19,11 +19,7 @@ public class Inventory {
 	private Long id;
 	private int size; //Standard size is 28 "slots", limits item set size
 	private Set<Item> items;
-	
-	@JsonIgnore
 	private int worth;
-	
-	@JsonIgnore
 	private int weight;
 	
 	@JsonIgnore
@@ -50,14 +46,14 @@ public class Inventory {
 	@OneToMany(mappedBy = "inventory")
 	public Set<Item> getItems() {
 		return items;
-	} // should this be a Set<Long> to get the item Id's instead? Maybe include another getter/setter for it
+	}
 	
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
 
 	@OneToOne
-	@JoinColumn(name = "ownerId")
+	@JoinColumn(name = "ownerId") //look into CascadeType.PERSIST or CascadeType.ALL
 	public Character getOwner() {
 		return owner;
 	}
