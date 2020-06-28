@@ -7,23 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tristanchester.npc.entity.Character;
-import com.tristanchester.npc.entity.Inventory;
-import com.tristanchester.npc.entity.Item;
 import com.tristanchester.npc.repository.CharacterRepo;
 import com.tristanchester.npc.repository.InventoryRepo;
-import com.tristanchester.npc.repository.ItemRepo;
-import com.tristanchester.npc.service.InventoryService; //For use in initializing empty inventory
+import com.tristanchester.npc.service.InventoryService;
 
 @Service
 public class CharacterService {
-	
+
+	private InventoryService invService;
+
 	private static final Logger logger = LogManager.getLogger(CharacterService.class);
 	
 	@Autowired
 	private CharacterRepo repo;
-
-	private InventoryRepo inventoryRepo;
-//	private InventoryService inventoryService;
 	
 	public Character getCharacterById(Long id) throws Exception {
 		try {
@@ -37,12 +33,9 @@ public class CharacterService {
 	public Iterable<Character> getCharacters() { return repo.findAll(); }
 	
 	public Character createCharacter(Character character) {
-//		initInventory(character.getId());
 		return repo.save(character);
 	}
 
-	//TODO: Add Character stats to modify NOTE: setInventory() has not been implemented in this method, consider removing inventory logic
-	//Takes character arg, when called will check amount of items within character's inventory to ensure limits aren't broken
 	public Character modifyCharacterInfo(Character character) throws Exception {
 		try {
 			Character original = repo.findOne(character.getId());
