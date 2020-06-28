@@ -12,6 +12,10 @@
 # Generated files
 .idea/**/contentModel.xml
 
+#Ignore log4j2 files
+logs/*
+logs/logrj2-example.log
+
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
