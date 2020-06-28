@@ -35,18 +35,19 @@ public class CharacterController {
 					e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	/*
-	TODO:
-	 Implement retrieval of ALL characters (convert characters into set and return?)
-	 Consider returning a list of the character id's instead of a set of the object
-	 */
-	//Implement this method in LocationController?? If so, don't return whole characters, return as set of ids
-//	@RequestMapping(method = RequestMethod.GET)
-//	public ResponseEntity<Object> getAllCharacters() {
-//		return new ResponseEntity<Object>(
-//				service.getCharacters(), HttpStatus.OK);
-//	}
-	
+
+	//TODO: Test Implementation
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<Object> getAllCharacters() {
+		try {
+			return new ResponseEntity<Object>(
+					service.getCharacters(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(
+					e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Object> modifyCharacter(@RequestBody Character character, @PathVariable Long id) throws Exception {
 		try {
