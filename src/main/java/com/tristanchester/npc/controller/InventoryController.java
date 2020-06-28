@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tristanchester.npc.entity.Inventory;
 import com.tristanchester.npc.service.InventoryService;
 
+import javax.xml.ws.Response;
+
 @RestController
 @RequestMapping("characters/{id}/inventory") 
 public class InventoryController {
@@ -30,6 +32,15 @@ public class InventoryController {
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(
 					e, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/{inventoryId}")
+	public ResponseEntity<Object> getInventory(@PathVariable Long id) {
+		try {
+			return new ResponseEntity<Object>(service.getInventoryById(id), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 
