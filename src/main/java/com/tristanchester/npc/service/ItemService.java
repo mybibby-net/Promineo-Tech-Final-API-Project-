@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 import com.tristanchester.npc.entity.Item;
 import com.tristanchester.npc.repository.ItemRepo;
 
