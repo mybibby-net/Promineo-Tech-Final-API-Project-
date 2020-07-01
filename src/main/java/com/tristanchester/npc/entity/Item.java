@@ -3,10 +3,11 @@ package com.tristanchester.npc.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Item {
-	
+
 	private Long id;
 	private String name;
 	private String description;
@@ -64,12 +65,11 @@ public class Item {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	public Inventory getInventory() { return inventory; }
+	@JoinColumn(name = "inventoryId")
+	public Inventory getInventory() {
+		return inventory;
+	}
 
 	public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
 }
-//TODO:
-// Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements:
-// 	com.tristanchester.npc.entity.Item.inventory
-//Check to see if above has been resolved
