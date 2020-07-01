@@ -42,7 +42,11 @@ public class CharacterService {
 			original.setName(character.getName());
 			original.setAge(character.getAge());
 			original.setType(character.getType());
-//			original.setLocation(character.getLocation());
+			original.setHealth(character.getHealth());
+			original.setStamina(character.getStamina());
+			original.setStrength(character.getStrength());
+			original.setIntellect(character.getIntellect());
+			original.setCharisma(character.getCharisma());
 			repo.save(original);
 			return original;
 			} catch (Exception e) {
