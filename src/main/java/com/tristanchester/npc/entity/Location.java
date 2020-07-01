@@ -12,16 +12,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Location {
-	//TODO: Create Location Service and Controller, Consider "storing" all character, items, etc within the specified region? (Use Location as a container?)
 	
 	private Long id;
 	private String name;
 	private String description;
 	private int age;
 	private int landSize;
-	
-	//TODO: Commented out population Getters/setters, perform population calculations in service layer
-	@JsonIgnore
 	private int populationSize;
 	
 	@JsonIgnore
@@ -69,22 +65,12 @@ public class Location {
 		this.landSize = landSize;
 	}
 	
-//	public int getPopulationSize() {
-//		return populationSize;
-//	}
-//	
-//	public void setPopulationSize(int populationSize) {
-//		this.populationSize = populationSize;
-//	}
-	
-//	@OneToMany(mappedBy = "location")
-//	public Set<Long> getCharacters() {
-//		return characterIds;
-//	}
+	public int getPopulationSize() {
+		return populationSize;
+	}
 
-	//TODO: uncomment when location and character system complete
-//	public void setCharacters(Character character) {
-//		this.character = character;
-//	}
+	public void setPopulationSize(int populationSize) {
+		this.populationSize = populationSize;
+	}
 	
 }

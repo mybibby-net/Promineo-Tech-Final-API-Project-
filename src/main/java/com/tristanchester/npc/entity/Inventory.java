@@ -1,21 +1,15 @@
 package com.tristanchester.npc.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Inventory {
-	
+
 	private Long id;
 	private int size; //Standard size is 28 "slots", limits item set size
 	private Set<Item> items;
@@ -24,7 +18,9 @@ public class Inventory {
 	
 	@JsonIgnore
 	private Character owner;
-	
+
+	public Inventory() {}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -43,11 +39,11 @@ public class Inventory {
 		this.size = size;
 	}
 
-	@OneToMany(mappedBy = "inventory")
+	@OneToMany(mappedBy = "inventory", targetEntity = Item.class)
 	public Set<Item> getItems() {
 		return items;
 	}
-	
+
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}

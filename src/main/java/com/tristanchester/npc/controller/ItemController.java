@@ -26,7 +26,7 @@ public class ItemController {
 				service.getAllItems(), HttpStatus.OK
 				);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> createItem(@RequestBody Item item) {
 		return new ResponseEntity<Object>(
