@@ -31,7 +31,7 @@ public class InventoryService {
 
 	public Inventory createNewInventory(Set<Long> itemIds, Long ownerId) throws Exception{
 		try {
-			//Character owner = characterRepo.findOne(ownerId);
+			Character owner = characterRepo.findOne(ownerId);
 			Inventory inventory = new Inventory();
 			inventory.setOwner(
 				characterRepo.findOne(ownerId));
@@ -40,7 +40,7 @@ public class InventoryService {
 			);
 			inventory.setSize(28); //28 as default size, think "slots"
 			inventory.setWorth(
-					calculateNetWorth(inventory.getItems())
+					calculateNetWorth(inventory.getItems(), owner.getCharisma())
 			);
 			inventory.setWeight(
 					calculateNetWeight(inventory.getItems())
@@ -62,14 +62,15 @@ public class InventoryService {
 					convertItemsToSet(itemRepo.findAll(itemIds))
 				);
 				originalInventory.setWorth(
-						calculateNetWorth(originalInventory.getItems())
+					calculateNetWorth(originalInventory.getItems(), owner.getCharisma())
 				);
 				originalInventory.setWeight(
 					calculateNetWeight(originalInventory.getItems())
 				);
+				return originalInventory;
+			} else {
+				return originalInventory;
 			}
-			return originalInventory;
-			//If This hard limit doesn't work remove if conditional
 
 		} catch (Exception e) {
 			logger.error("Unable to add items to inventory with id: " + ownerId, e);
@@ -89,14 +90,18 @@ public class InventoryService {
 	public int getItemQuantity(Inventory inventory) {
 		return inventory.getItems().size();
 	}
-
+	
+	public int calculateCharismaModifier(Long id) {
+		return characterRepo.findOne(id).getCharisma();
+	}
+	
 	//TODO: Consider using Charisma as a discount enum
-	public int calculateNetWorth(Set<Item> items) {
+	public int calculateNetWorth(Set<Item> items, int charismaModifier) {
 		int worth = 0;
 		for (Item item : items) {
 			worth += item.getCost();
 		}
-		return worth;
+		return worth * charismaModifier / 4;
 	}
 
 	public int calculateNetWeight(Set<Item> items) {
