@@ -66,7 +66,7 @@ public class InventoryService {
 				);
 				originalInventory.setWorth(
 					calculateNetWorth(
-						originalInventory.getItems())
+						originalInventory.getItems(), characterRepo.findOne(ownerId).getCharisma())
 				);
 				originalInventory.setWeight(
 					calculateNetWeight(originalInventory.getItems())
@@ -89,6 +89,10 @@ public class InventoryService {
 		}
 	}
 
+	public int calculateCharisma(Long id) {
+		return characterRepo.findOne(id).getCharisma();
+	}
+
 	public Set<Item> convertItemsToSet(Iterable<Item> iterableItem) {
 		Set<Item> itemSet = new HashSet<Item>();
 		for (Item item : iterableItem) {
@@ -102,12 +106,12 @@ public class InventoryService {
 	}
 
 	//TODO: Use Charisma as a discount modifier for item costs, factor stat check into net worth calculation
-	public int calculateNetWorth(Set<Item> items) {
+	public int calculateNetWorth(Set<Item> items, int charismaModifier) {
 		int worth = 0;
 		for (Item item : items) {
 			worth += item.getCost();
 		}
-		return worth;
+		return worth * charismaModifier / 4;
 	}
 
 	public int calculateNetWeight(Set<Item> items) {
