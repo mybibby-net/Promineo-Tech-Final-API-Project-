@@ -19,6 +19,8 @@ public class Character {
 	private int intellect;
 	private int charisma;
 
+	public Character() {}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -85,17 +87,6 @@ public class Character {
 	public void setCharisma(int charisma) {
 		this.charisma = charisma;
 	}
-
-	//TODO: Uncomment when location system is finished
-//	@ManyToOne(cascade = CascadeType.ALL) //many characters to one location
-//	@JoinColumn(name = "id")
-//	public Location getLocation() {
-//		return location;
-//	}
-	
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
 
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
 	public Inventory getInventory() {
