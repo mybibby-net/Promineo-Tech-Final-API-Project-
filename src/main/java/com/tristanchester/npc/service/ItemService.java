@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 import com.tristanchester.npc.entity.Item;
+import com.tristanchester.npc.repository.CharacterRepo;
 import com.tristanchester.npc.repository.ItemRepo;
 
 @Service
 public class ItemService {
-	//TODO: Add additional logic for items, make more elaborate
 
 	private final static Logger logger = LogManager.getLogger(ItemService.class);
 	
@@ -28,17 +28,37 @@ public class ItemService {
 		return repo.save(item);
 	}
 	
+	//TODO: incorporate player stats into item modification instead of the inventory
 	public Item modifyItem(Item item, Long id) throws Exception {
 		try {
 			Item original = repo.findOne(id);
 			original.setName(
-					item.getName());
+				item.getName()
+					);
 			original.setDescription(
-					item.getDescription());
+				item.getDescription()
+					);
 			original.setCost(
-					item.getCost());
+				item.getCost()
+					);
 			original.setWeight(
-					item.getWeight());
+				item.getWeight()
+					);
+			original.setHealthModifier(
+				item.getHealthModifier()
+					);
+			original.setStaminaModifier(
+				item.getStaminaModifier()
+					);
+			original.setStrengthModifier(
+				item.getStrengthModifier()
+					);
+			original.setIntellectModifier(
+				item.getIntellectModifier()
+					);
+			original.setCharismaModifier(
+				item.getCharismaModifier()
+					);
 			return repo.save(original);
 		} catch (Exception e) {
 			logger.error("Exception occurred while attempting to modify item: " + id, e);
@@ -46,7 +66,7 @@ public class ItemService {
 		}
 	}
 	
-	public void removeItem(Long id) throws Exception{
+	public void removeItem(Long id) throws Exception {
 		try {
 			repo.delete(id);
 		} catch (Exception e) {

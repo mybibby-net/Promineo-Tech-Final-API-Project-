@@ -3,7 +3,6 @@ package com.tristanchester.npc.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Item {
@@ -13,7 +12,11 @@ public class Item {
 	private String description;
 	private int cost;
 	private int weight;
-	private int statModifier;
+	private int healthModifier;
+	private int staminaModifier;
+	private int strengthModifier;
+	private int intellectModifier;
+	private int charismaModifier;
 
 	@JsonIgnore
 	private Inventory inventory;
@@ -44,10 +47,6 @@ public class Item {
 		this.description = description;
 	}
 	
-	public int getStatModifier() { return statModifier; } //TODO: Add stat system to ItemService
-
-	public void setStatModifier(int statModifier) { this.statModifier = statModifier; }
-	
 	public int getCost() {
 		return cost;
 	}
@@ -70,6 +69,48 @@ public class Item {
 		return inventory;
 	}
 
-	public void setInventory(Inventory inventory) { this.inventory = inventory; }
+	public void setInventory(Inventory inventory) { 
+		this.inventory = inventory; 
+	}
+
+	public int getHealthModifier() {
+		return healthModifier;
+	}
+
+	public void setHealthModifier(int healthModifier) {
+		this.healthModifier = healthModifier;
+	}
+
+	public int getStaminaModifier() {
+		return staminaModifier;
+	}
+
+	public void setStaminaModifier(int staminaModifier) {
+		this.staminaModifier = staminaModifier;
+	}
+
+	public int getStrengthModifier() {
+		return strengthModifier;
+	}
+
+	public void setStrengthModifier(int strengthModifier) {
+		this.strengthModifier = strengthModifier;
+	}
+
+	public int getIntellectModifier() {
+		return intellectModifier;
+	}
+
+	public void setIntellectModifier(int intellectModifier) {
+		this.intellectModifier = intellectModifier;
+	}
+
+	public int getCharismaModifier() {
+		return charismaModifier;
+	}
+
+	public void setCharismaModifier(int charismaModifier) {
+		this.charismaModifier = charismaModifier;
+	}
 
 }

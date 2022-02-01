@@ -54,7 +54,7 @@ public class InventoryController {
 
 	//Adds set of item id's to inventory
 	@RequestMapping(value = "/{inventoryId}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateInventory(
+	public ResponseEntity<Object> updateInventory( //TODO: Consider refactoring method name to conventional function name (i.e. addInventoryItems() or something)
 			@RequestBody Set<Long> itemIds, @PathVariable Long inventoryId) {
 			try {
 				return new ResponseEntity<Object>(

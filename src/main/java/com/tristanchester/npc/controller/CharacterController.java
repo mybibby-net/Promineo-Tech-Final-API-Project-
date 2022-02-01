@@ -15,7 +15,7 @@ import com.tristanchester.npc.service.CharacterService;
 import javax.xml.ws.Response;
 
 @RestController
-@RequestMapping("/characters")
+@RequestMapping("/character")
 public class CharacterController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class CharacterController {
 	}
 
 	//TODO: Test Implementation
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/ ", method = RequestMethod.GET)
 	public ResponseEntity<Object> getAllCharacters() {
 		try {
 			return new ResponseEntity<Object>(

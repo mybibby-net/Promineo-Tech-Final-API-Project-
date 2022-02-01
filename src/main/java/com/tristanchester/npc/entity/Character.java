@@ -10,7 +10,7 @@ public class Character {
 	private Long id;
 	private String name;
 	private int age;
-	private Location location;
+//	private Location location;
 	private Inventory inventory;
 	private CharacterType type;
 	private int health;

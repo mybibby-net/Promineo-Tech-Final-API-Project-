@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tristanchester.npc.entity.Character;
 import com.tristanchester.npc.entity.Inventory;
 import com.tristanchester.npc.entity.Item;
 import com.tristanchester.npc.repository.CharacterRepo;
@@ -19,8 +18,6 @@ import com.tristanchester.npc.repository.ItemRepo;
 public class InventoryService {
 
 	private static final Logger logger = LogManager.getLogger(InventoryService.class);
-
-	private ItemService itemService;
 
 	@Autowired
 	private InventoryRepo repo;
@@ -35,7 +32,8 @@ public class InventoryService {
 		try {
 			Inventory inventory = new Inventory();
 			inventory.setOwner(
-				characterRepo.findOne(ownerId));
+				characterRepo.findOne(ownerId)
+			);
 			inventory.setItems(
 				convertItemsToSet(itemRepo.findAll(itemIds))
 			);
@@ -71,15 +69,16 @@ public class InventoryService {
 				originalInventory.setWeight(
 					calculateNetWeight(originalInventory.getItems())
 				);
+				originalInventory.setSize(
+						originalInventory.getSize()
+						);
 				associateItemsWithInventory(originalInventory);
 			}
 			return repo.save(originalInventory);
-			//If This hard limit doesn't work remove conditional
 		} catch (Exception e) {
 			logger.error("Unable to add items to inventory with id: " + ownerId, e);
 			throw new Exception("Unable to add to inventory");
 		}
-
 	}
 
 	public void associateItemsWithInventory(Inventory inventory) {
@@ -104,7 +103,6 @@ public class InventoryService {
 		return inventory.getItems().size();
 	}
 
-	//TODO: Use Charisma as a discount modifier for item costs, factor stat check into net worth calculation
 	public int calculateNetWorth(Set<Item> items, int charismaModifier) {
 		int worth = 0;
 		for (Item item : items) {
@@ -112,7 +110,8 @@ public class InventoryService {
 		}
 		return worth * charismaModifier / 4;
 	}
-
+	
+	//TODO: Use strength stat as a net weight modifier
 	public int calculateNetWeight(Set<Item> items) {
 		int weight = 0;
 		for (Item item : items) {

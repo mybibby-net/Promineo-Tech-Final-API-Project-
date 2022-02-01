@@ -6,4 +6,3 @@ public enum CharacterType {
 	NONPLAYER;
 	
 }
-//Character types: Non-Player, Player

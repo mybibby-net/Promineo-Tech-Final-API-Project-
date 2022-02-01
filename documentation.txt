@@ -1,0 +1,83 @@
+(DRAFT)
+
+Include:
+    - Resource Description
+    - URI's (endpoints)
+    - A Sample Request
+    - A Sample Response
+    - Request Parameters
+    - Response Parameters
+    - Error Handling Information
+
+(EXAMPLE):
+
+    RESOURCE DESCRIPTION:
+        Creates a new "character" within the Database
+        If the {inventory} parameter is left unpopulated an empty {inventory} will be created
+        and assigned to the created character and the {type} parameter will default to PLAYER
+    
+    PARAMETERS:
+        {id}        | Long: Refers to the auto-generated ID of the object in the database
+        {name}      | String: Refers to the name of the character 
+        {age}       | int: Refers to the numerical age of the character
+        {type}      | enum: Refers to the "type" of character (types listed below)
+                    |        PLAYER (default if undefined in request)
+                    |        NONPLAYER (Must be specified in request)
+        {inventory} | Object: Refers to the list of items the character posseses, 
+                    |          serves as a container for items
+                    |            Parameters:
+                    |                {id}    | int: 
+                    |                             Refers to the auto-generated numerical ID 
+                    |                             of the inventory in the database
+                    |                {size}  | int: 
+                    |                        |     Refers to the "size" ( as a measure of how much can be stored)  
+                    |                        |     of the inventory in "units"
+                    |                {items} | ArrayList<Item>: 
+                    |                              Refers to the list of "items"
+                    |                              currently contained within the inventory
+        {health}    | int: Refers to the current "health points" of the character
+        {strength}  | int: Refers to the current "strength" (as a measure of capability) of the character
+        {stamina}   | int: Refers to the "stamina" (as a measure of ability) of the character
+        {intellect} | int: Refers to the "intellect" (as a measure of ability) of the character
+        {charisma}  | int: Refers to the "charisma" (as a measure of ability) of the character
+
+    URI: Http://localhost:8080/character/
+        (This URI will be different when finally deployed, localhost is temp)
+
+    REQUEST (JSON), POST:
+        http://localhost:8080/character
+            {
+                "name": "Test Character",
+                "age": "23",
+                "type": "PLAYER",
+                "health": "10",
+                "strength": "10",
+                "stamina": "10",
+                "intellect": "10",
+                "charisma": "10"
+            }
+    
+    RESPONSE (JSON):
+        {
+            "id": 1,
+            "name": "Test Character",
+            "age": 22,
+            "inventory": {
+                "id": 1,
+                "size": 0,
+                "items": [],
+                "worth": 0,
+                "weight": 0
+            },
+            "type": "PLAYER",
+            "health": 10,
+            "strength": 10,
+            "stamina": 10,
+            "intellect": 10,
+            "charisma": 10
+        }
+    
+    RESPONSE PARAMETERS:
+
+    ERROR HANDLING:
+

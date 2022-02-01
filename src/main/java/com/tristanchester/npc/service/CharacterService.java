@@ -10,16 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.tristanchester.npc.entity.Character;
 import com.tristanchester.npc.repository.CharacterRepo;
-import com.tristanchester.npc.repository.InventoryRepo;
-import com.tristanchester.npc.service.InventoryService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 @Service
 public class CharacterService {
-
-	private InventoryService invService;
-	private InventoryRepo invRepo;
 
 	private static final Logger logger = LogManager.getLogger(CharacterService.class);
 	
@@ -35,7 +31,18 @@ public class CharacterService {
 		}
 	}
 	
-	public Iterable<Character> getCharacters() { return repo.findAll(); }
+	//TODO: Test implementation, try and break it?
+	public Iterable<Character> getCharacters() throws Exception { 
+		try {
+			return repo.findAll();
+		} catch (Exception e) {
+			ArrayList<Integer> characters = new ArrayList<Integer>();
+			for (int character : characters) {
+				logger.error("Exception occured while trying to retrieve character: " + characters.subList(characters.indexOf(0), characters.size()));
+			}
+			throw e;
+		}
+	}
 	
 	public Character createCharacter(Character character) {
 		Inventory inventory = new Inventory();

@@ -1,6 +1,5 @@
 package com.tristanchester.npc.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,15 +10,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Inventory {
 
 	private Long id;
-	private int size; //Standard size is 28 "slots", limits item set size
-	private Set<Item> items;
+	private int size;
+	private Set<Item> items; //TODO: Removed unused HashSet import, investigate why a HashSet is a better alternative?
 	private int worth;
 	private int weight;
 	
 	@JsonIgnore
 	private Character owner;
-
-	public Inventory() {}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

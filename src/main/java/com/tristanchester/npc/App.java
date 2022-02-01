@@ -13,3 +13,6 @@ public class App
         SpringApplication.run(App.class);
     }
 }
+/* 
+ * TODO: Refactor Request Mappings in entity controllers to remove plurals
+ */
